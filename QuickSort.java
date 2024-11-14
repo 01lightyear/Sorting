@@ -3,19 +3,26 @@ package Sorting;
 public class QuickSort {
     public static int partition(int[] arr, int low, int high) {
         int pivot = arr[low];
-        int i = low;
-        for (int j = low + 1; j <= high; j++) {
-            if (arr[j] < pivot) {
+        int i = low + 1, j = high;
+        while (i <= j) {
+            while (i <= high && arr[i] < pivot && i <= j) {
                 i++;
-                int tmp = arr[j];
-                arr[j] = arr[i];
-                arr[i] = tmp;
+            }
+            while (j >= low && arr[j] > pivot && i <= j) {
+                j--;
+            }
+            if (i <= j) {
+                int tmp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = tmp;
+                i++;
+                j--;
             }
         }
         int tmp = arr[low];
-        arr[low] = arr[i];
-        arr[i] = tmp;
-        return i;
+        arr[low] = arr[i - 1];
+        arr[i - 1] = tmp;
+        return i - 1;
     }
 
     public static void QuickSort(int[] arr, int low, int high) {
